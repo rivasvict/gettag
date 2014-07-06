@@ -10,6 +10,7 @@ router.get('/', function(req, res) {
 
 router.post('/urlGetter', function(req,res){
 	url = req.body.url;
+	console.log(url);
 	command = 'curl ' + url;
 	ex = function(command,callback){
 		exec(command,function(error,stdout,stderr){

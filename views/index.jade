@@ -3,8 +3,8 @@ extends layout
 block content
 	section(ng-app='usys',id='content')
 		div(ng-controller='urlCTRL',id='text')
-			span
+			span(ng-repeat='u in url')
 				| ULR to verify
-			input(type='text',placeholder='Insert your url',ng-model='url.text',ng-change='validate()')
-			span(class='error')
-				| Error
+				input(type='text',placeholder='Insert your url',ng-model='u.text',ng-change='validate()')
+				span(class='error',id="{{u.text}}")
+					| Error
