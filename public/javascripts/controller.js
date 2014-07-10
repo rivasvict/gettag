@@ -27,8 +27,8 @@ app.controller('urlCTRL',function($scope,$http,$validator){
 					$scope.url.push({text:$scope.url.text,id:$scope.url[$scope.url.length-1].id+1});
 				})
 				.error(function(data,status,headers,cnfig){
-					console.log('Something is wrong');
-					if($scope.url[$scope.url.length-1].text !== undefined){
+					console.log('Something is wrong');console.log($scope.url[$scope.url.length-1].text);
+					if($scope.url[$scope.url.length-1].text===undefined){
 						$scope.url = $scope.url.slice(0,$scope.url.length-1);
 					}
 					$validator.urlC('Not found',$scope.url[$scope.url.length-1].id);
