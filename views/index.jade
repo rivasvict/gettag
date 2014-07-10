@@ -6,5 +6,5 @@ block content
 			span(ng-repeat='u in url')
 				| ULR to verify
 				input(type='text',placeholder='Insert your url',ng-model='u.text',ng-change='validate()')
-				span(class='error',id="{{u.text}}")
+				span(class='error',id="{{u.id}}")
 					| Error
