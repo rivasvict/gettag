@@ -5,6 +5,8 @@ block content
 		div(ng-controller='urlCTRL',id='text')
 			span(ng-repeat='u in url')
 				| ULR to verify
-				input(type='text',placeholder='Insert your url',ng-model='u.text',ng-change='validate()')
+				input(type='text',placeholder='Insert your url',ng-model='u.text',ng-change='validate()',ng-disabled='u.disabled')
+				button(ng-click='delet(u.id)',ng-disabled='!u.disabled')
+					| Delete
 				span(class='error',id="{{u.id}}")
 					| Error
