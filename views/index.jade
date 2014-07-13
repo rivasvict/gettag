@@ -9,4 +9,13 @@ block content
 				button(ng-click='delet(u.id)',ng-disabled='!u.disabled')
 					| Delete
 				span(class='error',id="{{u.id}}")
-					| 
+			
+			div(id='codeHead',class='code')
+				| &lthead&gt
+				tag(ng-repeat='u in url',ng-show='u.type == ".css"')
+					| {{u.tag}}
+				| &lt/head&gt
+
+			div(id='codeBody',class='code')
+				tag(ng-repeat='u in url',ng-show='u.type == ".js"')
+					| {{u.tag}}
