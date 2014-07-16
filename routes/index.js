@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var http = require('http');
 var exec = require('child_process').exec;
+var request = require('request');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -10,7 +11,12 @@ router.get('/', function(req, res) {
 
 router.post('/urlGetter', function(req,res){
 	url = req.body.url;
-	var command = 'wget ' + url + ' -O /dev/null';
+
+	request(url,function(error,response,body){
+		if(body!==undefined){res.send(200)}else{res.send(404);}
+	});
+
+/*	var command = 'wget ' + url + ' -O /dev/null';
 	ex = function(command,callback){
 		exec(command,function(error,stdout,stderr){
 			callback(stdout,error,stderr);
@@ -23,7 +29,7 @@ router.post('/urlGetter', function(req,res){
 		}else{
 			res.send(404);
 		}
-	});
+	});*/
 
 });
 

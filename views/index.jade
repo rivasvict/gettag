@@ -19,3 +19,5 @@ block content
 			div(id='codeBody',class='code')
 				tag(ng-repeat='u in url',ng-show='u.type == ".js"')
 					| {{u.tag}}
+				//
+					iframe(id='ifr',ng-src='{{urli}}')
