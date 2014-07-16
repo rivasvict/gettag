@@ -10,8 +10,7 @@ router.get('/', function(req, res) {
 
 router.post('/urlGetter', function(req,res){
 	url = req.body.url;
-	console.log(url);
-	command = 'curl ' + url;
+	var command = 'wget ' + url + ' -O /dev/null';
 	ex = function(command,callback){
 		exec(command,function(error,stdout,stderr){
 			callback(stdout,error,stderr);
@@ -19,7 +18,7 @@ router.post('/urlGetter', function(req,res){
 	};
 
 	ex(command,function(data,error,serror){
-		if(data!==""){
+		if(serror.indexOf('200 OK')!==-1){
 			res.send(200);
 		}else{
 			res.send(404);

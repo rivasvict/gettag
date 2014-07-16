@@ -86,7 +86,6 @@ app.controller('urlCTRL',function($scope,$http,$validator){
 				});
 	};
 
-
 	$scope.delet = function(id){
 		angular.forEach($scope.url,function(v,k){
 			if(v.id === id) v.del = true;
