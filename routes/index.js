@@ -12,11 +12,11 @@ router.get('/', function(req, res) {
 router.post('/urlGetter', function(req,res){
 	url = req.body.url;
 
-/*	request(url,function(error,response,body){
+	request(url,function(error,response,body){
 		if(body!==undefined){res.send(200)}else{res.send(404);}
-	});*/
+	});
 
-	var command = 'wget ' + url + ' -O /dev/null';
+/*	var command = 'wget ' + url + ' -O /dev/null';
 	ex = function(command,callback){
 		exec(command,function(error,stdout,stderr){
 			callback(stdout,error,stderr);
@@ -29,7 +29,7 @@ router.post('/urlGetter', function(req,res){
 		}else{
 			res.send(404);
 		}
-	});
+	});*/
 
 });
 
