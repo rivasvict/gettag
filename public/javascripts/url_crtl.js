@@ -15,6 +15,7 @@ angular.module('usys.controllers',[])
 	}
 
 	$scope.validate = function(){
+		console.log(cdnObject);
 		$scope.as = JSON.parse(cdnObject.content.body);
 		console.log($scope.as);
 		$http({method:'POST',url:'/urlGetter',data:{url:$scope.url[$scope.url.length-1].text}})

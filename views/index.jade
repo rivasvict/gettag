@@ -21,4 +21,5 @@ block content
 					| {{u.tag}}
 				//
 					iframe(id='ifr',ng-src='{{urli}}')
-			{{as.results}}
+			span(id='cdnPkg',ng-repeat='pkg in as.results')
+				| Name: {{pkg.name}} - Url: {{pkg.latest}}<br>
