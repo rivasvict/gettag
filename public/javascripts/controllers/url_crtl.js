@@ -1,5 +1,5 @@
 angular.module('usys.controllers',[])
-	.controller('urlCTRL',['$scope','validator','$sce','$http','cdnObject',function($scope,validator,$sce,$http,cdnObject){
+	.controller('urlCTRL',['$scope','$validator','$sce','$http','cdnObject',function($scope,$validator,$sce,$http,cdnObject){
 
 	var jsT = {
 		first : '<script type="text/javascript" src="',
@@ -15,12 +15,13 @@ angular.module('usys.controllers',[])
 	}
 
 	$scope.validate = function(){
-		var as = cdnObject();
-		console.log(as);
+	/*	console.log(cdnObject);
+		$scope.as = JSON.parse(cdnObject.content.body);*/
+		console.log($scope.as);
 		$http({method:'POST',url:'/urlGetter',data:{url:$scope.url[$scope.url.length-1].text}})
 				.success(function(data,status,headers,config){
 					console.log('ok');
-					var valid = validator.urlC('ok',$scope.url[$scope.url.length-1].id,$scope.url[$scope.url.length-1].text);
+					var valid = $validator.urlC('ok',$scope.url[$scope.url.length-1].id,$scope.url[$scope.url.length-1].text);
 					if(valid !== false){
 						$scope.url[$scope.url.length-1].disabled = true;
 						$scope.url[$scope.url.length-1].type = valid[0];
@@ -37,7 +38,7 @@ angular.module('usys.controllers',[])
 					if($scope.url[$scope.url.length-1].text===undefined){
 						$scope.url = $scope.url.slice(0,$scope.url.length-1);
 					}
-					validator.urlC('Not found',$scope.url[$scope.url.length-1].id,$scope.url[$scope.url.length-1].text,validator.eMessage.NotUrl);
+					$validator.urlC('Not found',$scope.url[$scope.url.length-1].id,$scope.url[$scope.url.length-1].text,$validator.eMessage.NotUrl);
 				});
 
 	};
