@@ -33,4 +33,12 @@ router.post('/urlGetter', function(req,res){
 
 });
 
+router.post('/getCdn',function(req,res){
+	url = 'http://api.cdnjs.com/libraries';
+
+	request(url,function(error,response,body){
+		res.send(response);
+	});
+});
+
 module.exports = router;

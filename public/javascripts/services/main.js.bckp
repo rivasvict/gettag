@@ -1,5 +1,5 @@
-angular.module('usys.controllers',[])
-	.service('$validator',function(){
+angular.module('usys.services',[])
+	.service('validator',function(){
 
 	this.eMessage = {
 		invalidFile	: "This is not a js or css file",
