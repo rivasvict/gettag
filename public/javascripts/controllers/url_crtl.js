@@ -11,16 +11,22 @@ angular.module('usys.controllers',[])
 	};
 
 	if(!$scope.url){
-		$scope.url = [{text:'',id:0,del:false,disabled:false,type:'',tag:''}];
+		$scope.url = [{text:'',id:0,del:false,disabled:false,type:'',tag:'',blank:true}];
 	}
 
-	$scope.validate = function(){
-	/*	console.log(cdnObject);
-		$scope.as = JSON.parse(cdnObject.content.body);*/
-		console.log($scope.as);
-		$http({method:'POST',url:'/urlGetter',data:{url:$scope.url[$scope.url.length-1].text}})
-				.success(function(data,status,headers,config){
-					console.log('ok');
+	$scope.introduce = function(){
+		$scope.url[$scope.url.length-1].blank = false;
+	}
+
+	$scope.cdnChose = function(pkg){
+
+		if($scope.as===undefined) $scope.as = JSON.parse(cdnObject.content.body);
+
+		if(pkg!==undefined){
+			$scope.url[$scope.url.length-1].text = pkg+'';
+			$scope.url[$scope.url.length-1].disabled = true;
+			$scope.url[$scope.url.length-1].blank = false;
+//-----------------SEPARATE THIS INTO A UNIKE FUNCTION
 					var valid = $validator.urlC('ok',$scope.url[$scope.url.length-1].id,$scope.url[$scope.url.length-1].text);
 					if(valid !== false){
 						$scope.url[$scope.url.length-1].disabled = true;
@@ -30,8 +36,33 @@ angular.module('usys.controllers',[])
 						}else{
 							$scope.url[$scope.url.length-1].tag = cssT.first + valid[1] + cssT.second;
 						}
-						$scope.url.push({text:$scope.url.text,id:$scope.url[$scope.url.length-1].id+1,del:false,disabled:false});
+						$scope.url.push({text:$scope.url.text,id:$scope.url[$scope.url.length-1].id+1,del:false,disabled:false,blank:true});
 					}
+//---------------------------------------------------
+		}
+
+	}
+
+	$scope.validate = function(){
+	/*	console.log(cdnObject);
+		$scope.as = JSON.parse(cdnObject.content.body);*/
+		console.log($scope.as);
+		$http({method:'POST',url:'/urlGetter',data:{url:$scope.url[$scope.url.length-1].text}})
+				.success(function(data,status,headers,config){
+					console.log('ok');
+//-----------------SEPARATE THIS INTO A UNIKE FUNCTION
+					var valid = $validator.urlC('ok',$scope.url[$scope.url.length-1].id,$scope.url[$scope.url.length-1].text);
+					if(valid !== false){
+						$scope.url[$scope.url.length-1].disabled = true;
+						$scope.url[$scope.url.length-1].type = valid[0];
+						if(valid[0] === ".js"){
+							$scope.url[$scope.url.length-1].tag = jsT.first + valid[1] + jsT.second;
+						}else{
+							$scope.url[$scope.url.length-1].tag = cssT.first + valid[1] + cssT.second;
+						}
+						$scope.url.push({text:$scope.url.text,id:$scope.url[$scope.url.length-1].id+1,del:false,disabled:false,blank:true});
+					}
+//---------------------------------------------------
 				})
 				.error(function(data,status,headers,cnfig){
 					console.log('Something is wrong');

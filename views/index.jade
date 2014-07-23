@@ -4,11 +4,18 @@ block content
 	section(ng-app='usys',id='content')
 		div(ng-controller='urlCTRL',id='text')
 			span(ng-repeat='u in url')
-				| ULR to verify
-				input(type='text',placeholder='Insert your url',ng-model='u.text',ng-change='validate()',ng-disabled='u.disabled')
-				button(ng-click='delet(u.id)',ng-disabled='!u.disabled')
-					| Delete
-				span(class='error',id="{{u.id}}")
+				section(ng-show='u.blank',ng-hide='!u.blank')
+					button(ng-click='cdnChose()')
+						| Select from CDN source
+					button(ng-click='introduce()')
+						| Introduce your own package
+
+				section(ng-hide='u.blank')
+					| ULR to verify
+					input(type='text',placeholder='Insert your url',ng-model='u.text',ng-change='validate()',ng-disabled='u.disabled')
+					button(ng-click='delet(u.id)',ng-disabled='!u.disabled')
+						| Delete
+					span(class='error',id="{{u.id}}")
 			
 			div(id='codeHead',class='code')
 				| &lthead&gt
@@ -21,6 +28,8 @@ block content
 					| {{u.tag}}
 				//
 					iframe(id='ifr',ng-src='{{urli}}')
-			//
-				span(id='cdnPkg',ng-repeat='pkg in as.results')
-					| Name: {{pkg.name}} - Url: {{pkg.latest}}<br>
+			span(id='cdnPkg',ng-repeat='pkg in as.results')
+				| Name: {{pkg.name}} - Url: {{pkg.latest}} - 
+				a(ng-click='cdnChose(pkg.latest)',href='')
+					| Select
+				br
