@@ -1,0 +1,5 @@
+			span(id='cdnPkg',ng-repeat='pkg in as.results')
+				| Name: {{pkg.name}} - Url: {{pkg.latest}} - 
+				a(ng-click='cdnChose(pkg.latest)',href='')
+					| Select
+				br

@@ -28,8 +28,15 @@ block content
 					| {{u.tag}}
 				//
 					iframe(id='ifr',ng-src='{{urli}}')
-			span(id='cdnPkg',ng-repeat='pkg in as.results')
-				| Name: {{pkg.name}} - Url: {{pkg.latest}} - 
-				a(ng-click='cdnChose(pkg.latest)',href='')
-					| Select
+			section(ng-show='!pkg')
+				span(name='sp')
+					| Search by package name: 
+				input(type='text',name='pkgSearch')
 				br
+				span(id='cdnPkg',ng-repeat='pkg in as.results')
+					| Name: {{pkg.name}} - Url: {{pkg.latest}} - 
+					a(ng-click='cdnChose(pkg.latest)',href='')
+						| Select
+					br
+				button(name='cancel')
+					| Cancel

@@ -1,1 +1,1 @@
-angular.module('usys',['usys.controllers','usys.services','usys.services_more']);
+angular.module('usys',['usys.controllers','usys.services','usys.services_more','usys.directives']);
