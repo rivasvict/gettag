@@ -15,6 +15,8 @@ block content
 					input(type='text',placeholder='Insert your url',ng-model='u.text',ng-change='validate()',ng-disabled='u.disabled')
 					button(ng-click='delet(u.id)',ng-disabled='!u.disabled')
 						| Delete
+					button(ng-click='cancel_insert()',ng-hide='u.disabled')
+						| Cancel insertion
 					span(class='error',id="{{u.id}}")
 			
 			div(id='codeHead',class='code')
@@ -31,12 +33,12 @@ block content
 			section(ng-show='!pkg')
 				span(name='sp')
 					| Search by package name: 
-				input(type='text',name='pkgSearch')
+				input(type='text',name='pkgSearch',ng-model='pkgs.name')
 				br
-				span(id='cdnPkg',ng-repeat='pkg in as.results')
+				span(id='cdnPkg',ng-repeat='pkg in as.results | filter:pkgs')
 					| Name: {{pkg.name}} - Url: {{pkg.latest}} - 
 					a(ng-click='cdnChose(pkg.latest)',href='')
 						| Select
 					br
-				button(name='cancel')
+				button(ng-click='cancel_cdn()')
 					| Cancel

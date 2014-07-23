@@ -16,6 +16,18 @@ angular.module('usys.controllers',[])
 
 	$scope.introduce = function(){
 		$scope.url[$scope.url.length-1].blank = false;
+		$scope.pkg = true;
+	}
+
+	$scope.cancel_insert = function(){
+		$scope.url[$scope.url.length-1].blank = true;
+		$scope.cancel_cdn();
+	}
+
+	$scope.cancel_cdn = function(){
+		$scope.as = undefined;
+		$scope.pkgs = '';
+		$scope.pkg = true;
 	}
 
 	$scope.pkg = true;
@@ -39,16 +51,15 @@ angular.module('usys.controllers',[])
 		if($scope.as===undefined){
  			$scope.as = JSON.parse(cdnObject.content.body);
 			$scope.pkg = false;
-		}
-
-		
+		}		
 
 		if(pkg!==undefined){
 			$scope.url[$scope.url.length-1].text = pkg+'';
 			$scope.url[$scope.url.length-1].disabled = true;
 			$scope.url[$scope.url.length-1].blank = false;
 			$scope.vl();
-			$scope.pkg = true;
+			//-------Configuring views to defaults---------
+			$scope.cancel_cdn();
 		}
 
 	}
