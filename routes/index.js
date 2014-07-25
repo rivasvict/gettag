@@ -6,7 +6,7 @@ var request = require('request');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'scrptTagger - Get script and css tsgs for your app' });
 });
 
 router.post('/urlGetter', function(req,res){

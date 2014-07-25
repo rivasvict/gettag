@@ -1,6 +1,74 @@
+*{
+	border-width: 1px;
+}
+
 body {
-  padding: 50px;
+	padding: 50px 2% 10px 2%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+#content{
+	wigth:100%;
+	heigh:100%;
+}
+
+.inputs{
+	float:left;
+	width:50%;
+}
+
+.txtin{
+	margin-top:0px;
+}
+
+#text{
+
+}
+
+.insert{
+	float:left;
+}
+
+.code-container{
+	width: 50%;
+	margin-left: 50%;
+}
+
+#ccontainer-1{
+}
+
+.cpy-btn{
+	
+}
+
+.code#codeHead{
+	margin-bottom:40%;
+}
+
+.code#codeBody{
+	margin-bottom:40%;
+}
+
+#pkg-modal{
+	position: absolute;
+	background-color: white;
+	right:0px;
+	bottom:0px;
+	left:0px;
+	height:100%;	
+}
+
+#pkg-modal-inner{
+	width:99.9%;
+	height:91%;
+	margin-top:2%;
+}
+
+#cdn-results{
+	overflow:scroll;
+	height: 89%;
+	width: 92%;
+	margin: 1% 4%;
 }
 
 a {

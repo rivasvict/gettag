@@ -3,48 +3,54 @@ extends layout
 block content
 	section(ng-app='usys',id='content')
 		div(ng-controller='urlCTRL',id='text')
-			span(ng-repeat='u in url')
-				section(ng-show='u.blank',ng-hide='!u.blank')
-					button(ng-click='cdnChose()')
-						| Select from CDN source
-					button(ng-click='introduce()',data-clipboard-text='ass',id='copy-element')
-						| Introduce your own package
+			div(class='inputs')
+				section(ng-repeat='u in url',class='txtin')
 
-				section(ng-hide='u.blank')
-					| ULR to verify
-					input(type='text',placeholder='Insert your url',ng-model='u.text',ng-change='validate()',ng-disabled='u.disabled')
-					button(ng-click='delet(u.id)',ng-disabled='!u.disabled')
-						| Delete
-					button(ng-click='cancel_insert()',ng-hide='u.disabled')
-						| Cancel insertion
-					span(class='error',id="{{u.id}}")
+					section(ng-hide='u.blank',class='txtin')
+						| ULR to verify
+						input(type='text',placeholder='Insert your url',ng-model='u.text',ng-change='validate()',ng-disabled='u.disabled')
+						button(ng-click='delet(u.id)',ng-disabled='!u.disabled')
+							| Delete
+						button(ng-click='cancel_insert()',ng-hide='u.disabled')
+							| Cancel insertion
+						span(class='error',id="{{u.id}}")
+					section(ng-show='u.blank',ng-hide='!u.blank',class='insert')
+						button(ng-click='cdnChose()')
+							| Select from CDN source
+						button(ng-click='introduce()',data-clipboard-text='ass',id='copy-element')
+							| Introduce your own package
+
 			
-			div(id='codeHead',class='code')
-				| &lthead&gt
-				tag(ng-repeat='u in url',ng-show='u.type == ".css"')
-					| {{u.tag}}
-				| &lt/head&gt
-			button(id='css-button',tittle='Click to copy to clipboard')
-				| Copy css to clipboard
+			div(class='code-container')
+				div(id='ccontainer-1')
+					div(id='codeHead',class='code')
+						| &lthead&gt
+						tag(ng-repeat='u in url',ng-show='u.type == ".css"')
+							| {{u.tag}}
+						| &lt/head&gt
+					button(id='css-button',tittle='Click to copy to clipboard',class='cpy-btn')
+						| Copy css to clipboard
 
-
-			div(id='codeBody',class='code')
-				tag(ng-repeat='u in url',ng-show='u.type == ".js"')
-					| {{u.tag}}
-			button(id='js-button',data-clipboard-target='codeBody',tittle='Click to copy to clipboard')
-				| Copy to js clipboard
+				div(id='ccontainer-2')
+					div(id='codeBody',class='code')
+						tag(ng-repeat='u in url',ng-show='u.type == ".js"')
+							| {{u.tag}}
+					button(id='js-button',data-clipboard-target='codeBody',tittle='Click to copy to clipboard',class='cpy-btn')
+						| Copy to js clipboard
 
 				//
 					iframe(id='ifr',ng-src='{{urli}}')
-			section(ng-show='!pkg')
-				span(name='sp')
-					| Search by package name: 
-				input(type='text',name='pkgSearch',ng-model='pkgs.name')
-				br
-				span(id='cdnPkg',ng-repeat='pkg in as.results | filter:pkgs')
-					| Name: {{pkg.name}} - Url: {{pkg.latest}} - 
-					a(ng-click='cdnChose(pkg.latest)',href='')
-						| Select
+			section(ng-show='!pkg',id='pkg-modal')
+				div(id='pkg-modal-inner')
+					span(name='sp')
+						| Search by package name: 
+					input(type='text',name='pkgSearch',ng-model='pkgs.name')
 					br
-				button(ng-click='cancel_cdn()')
-					| Cancel
+					div(id='cdn-results')
+						span(id='cdnPkg',ng-repeat='pkg in as.results | filter:pkgs')
+							| Name: {{pkg.name}} - Url: {{pkg.latest}} - 
+							a(ng-click='cdnChose(pkg.latest)',href='')
+								| Select
+							br
+					button(ng-click='cancel_cdn()')
+						| Cancel
