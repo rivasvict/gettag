@@ -1,17 +1,46 @@
 angular.module('usys.controllers',[])
 	.controller('urlCTRL',['$scope','$validator','$sce','$http','cdnObject',function($scope,$validator,$sce,$http,cdnObject){
 
+	var css_clip = new ZeroClipboard($('button#css-button'));
+	var js_clip = new ZeroClipboard($('button#js-button'));
+
+	css_clip.on('copy',function(event){
+		var clipboard = event.clipboardData;
+		var css_tag = '';
+		angular.forEach($scope.url,function(v,k){
+			if(v.csst!==null){
+				css_tag+=v.tag;
+			}
+		});
+		css_tag = '<head>'+css_tag+'</head>';
+		clipboard.setData('text/plain',css_tag);
+		alert('Copied!');
+	});
+
+	js_clip.on('copy',function(event){
+		var clipboard = event.clipboardData;
+		var js_tag = '';
+		angular.forEach($scope.url,function(v,k){
+			if(v.jst!==null){
+				js_tag+=v.tag;
+			}
+		});
+		clipboard.setData('text/plain',js_tag);
+		alert('Copied!');
+	});
+
+
 	var jsT = {
 		first : '<script type="text/javascript" src="',
 		second:	'"></script>'
 	};
 	var cssT = {
-		first : '<script type="text/css" rel="stylesheet" src="',
+		first : '<link type="text/css" rel="stylesheet" src="',
 		second:	'" />'
 	};
 
 	if(!$scope.url){
-		$scope.url = [{text:'',id:0,del:false,disabled:false,type:'',tag:'',blank:true}];
+		$scope.url = [{text:'',id:0,del:false,disabled:false,type:'',tag:'',blank:true,jst:null,csst:null}];
 	}
 
 	$scope.introduce = function(){
@@ -39,10 +68,12 @@ angular.module('usys.controllers',[])
 			$scope.url[$scope.url.length-1].type = valid[0];
 			if(valid[0] === ".js"){
 				$scope.url[$scope.url.length-1].tag = jsT.first + valid[1] + jsT.second;
+				$scope.url[$scope.url.length-1].jst = true;
 			}else{
 				$scope.url[$scope.url.length-1].tag = cssT.first + valid[1] + cssT.second;
+				$scope.url[$scope.url.length-1].csst = true;
 			}
-			$scope.url.push({text:$scope.url.text,id:$scope.url[$scope.url.length-1].id+1,del:false,disabled:false,blank:true});
+			$scope.url.push({text:$scope.url.text,id:$scope.url[$scope.url.length-1].id+1,del:false,disabled:false,blank:true,csst:null,jst:null});
 		}
 	}
 

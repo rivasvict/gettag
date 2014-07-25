@@ -7,7 +7,7 @@ block content
 				section(ng-show='u.blank',ng-hide='!u.blank')
 					button(ng-click='cdnChose()')
 						| Select from CDN source
-					button(ng-click='introduce()')
+					button(ng-click='introduce()',data-clipboard-text='ass',id='copy-element')
 						| Introduce your own package
 
 				section(ng-hide='u.blank')
@@ -24,10 +24,16 @@ block content
 				tag(ng-repeat='u in url',ng-show='u.type == ".css"')
 					| {{u.tag}}
 				| &lt/head&gt
+			button(id='css-button',tittle='Click to copy to clipboard')
+				| Copy css to clipboard
+
 
 			div(id='codeBody',class='code')
 				tag(ng-repeat='u in url',ng-show='u.type == ".js"')
 					| {{u.tag}}
+			button(id='js-button',data-clipboard-target='codeBody',tittle='Click to copy to clipboard')
+				| Copy to js clipboard
+
 				//
 					iframe(id='ifr',ng-src='{{urli}}')
 			section(ng-show='!pkg')

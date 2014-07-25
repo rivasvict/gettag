@@ -3,6 +3,7 @@
 	"dependencies":{
 		"jquery":"1.11.1",
 		"angular":"1.2.19",
-		"requirejs":"2.1.14"
+		"requirejs":"2.1.14",
+		"zeroclipboard":"2.1.5"
 	}
 }
