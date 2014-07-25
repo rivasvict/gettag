@@ -47,9 +47,9 @@ block content
 					input(type='text',name='pkgSearch',ng-model='pkgs.name')
 					br
 					div(id='cdn-results')
-						span(id='cdnPkg',ng-repeat='pkg in as.results | filter:pkgs')
+						span(id='cdnPkg',ng-repeat='pkg in as.results | filter:pkgs',class='pkg-item')
 							| Name: {{pkg.name}} - Url: {{pkg.latest}} - 
-							a(ng-click='cdnChose(pkg.latest)',href='')
+							a(ng-click='cdnChose(pkg.latest)',href='',class='pkg-link')
 								| Select
 							br
 					button(ng-click='cancel_cdn()')

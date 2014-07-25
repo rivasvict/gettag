@@ -69,10 +69,25 @@ body {
 	height: 89%;
 	width: 92%;
 	margin: 1% 4%;
+	background-color: rgb(114, 114, 114);
+	padding:1%;
+	color:white;
+	font-weight: bold;
 }
 
 a {
   color: #00B7FF;
+}
+
+a.pkg-link{
+	color: #FFFFFF;
+	text-decoration: none;
+	background-color: lime;
+	padding:5px;
+}
+
+.pkg-item{
+	
 }
 
 .error{
