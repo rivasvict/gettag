@@ -87,7 +87,15 @@ a.pkg-link{
 }
 
 .pkg-item{
-	
+	padding-bottom: 14px;
+}
+
+#pkg-name{
+
+}
+
+#pkg-url{
+
 }
 
 .error{

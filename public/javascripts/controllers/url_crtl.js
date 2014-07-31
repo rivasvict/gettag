@@ -4,6 +4,31 @@ angular.module('usys.controllers',[])
 	var css_clip = new ZeroClipboard($('button#css-button'));
 	var js_clip = new ZeroClipboard($('button#js-button'));
 
+	$scope.path = {
+		css:'',
+		js:''
+	}
+
+	$scope.pathc = function(){
+		angular.forEach($scope.url,function(v,k){
+			if(v.csst!==null){
+				var first = v.tag.slice(0,44);
+				var second =  v.tag.slice(v.tag.length-4,v.tag.length);
+				var package = v.pkg_name;
+				var path = $scope.path.css;
+				v.tag = '';
+				v.tag = first + path + package + second;
+			}else if(v.jst!==null){
+				var first = v.tag.slice(0,36);
+				var second =  v.tag.slice(v.tag.length-11,v.tag.length);
+				var package = v.pkg_name;
+				var path = $scope.path.js;
+				v.tag = '';
+				v.tag = first + path + package + second;
+			}
+		});
+	}
+
 	css_clip.on('copy',function(event){
 		var clipboard = event.clipboardData;
 		var css_tag = '';
@@ -29,18 +54,20 @@ angular.module('usys.controllers',[])
 		alert('Copied!');
 	});
 
-
-	var jsT = {
-		first : '<script type="text/javascript" src="',
-		second:	'"></script>'
-	};
-	var cssT = {
-		first : '<link type="text/css" rel="stylesheet" src="',
-		second:	'" />'
-	};
+	$scope.tagBuilder = function(){
+		var jsT = {
+			first : '<script type="text/javascript" src="' + $scope.path.js,
+			second:	'"></script>'
+		};
+		var cssT = {
+			first : '<link type="text/css" rel="stylesheet" src="' + $scope.path.css,
+			second:	'" />'
+		};
+		return {js:jsT,css:cssT};
+	}
 
 	if(!$scope.url){
-		$scope.url = [{text:'',id:0,del:false,disabled:false,type:'',tag:'',blank:true,jst:null,csst:null}];
+		$scope.url = [{text:'',id:0,del:false,disabled:false,type:'',tag:'',blank:true,jst:null,csst:null,pkg_name:''}];
 	}
 
 	$scope.introduce = function(){
@@ -66,18 +93,24 @@ angular.module('usys.controllers',[])
 		if(valid !== false){
 			$scope.url[$scope.url.length-1].disabled = true;
 			$scope.url[$scope.url.length-1].type = valid[0];
+			var name = $validator.fileId($scope.url[$scope.url.length-1].text);
+			$scope.url[$scope.url.length-1].pkg_name = name[1];
 			if(valid[0] === ".js"){
+				jsT = $scope.tagBuilder();
+				jsT = jsT.js;
 				$scope.url[$scope.url.length-1].tag = jsT.first + valid[1] + jsT.second;
 				$scope.url[$scope.url.length-1].jst = true;
 			}else{
+				cssT = $scope.tagBuilder();
+				cssT = cssT.css;
 				$scope.url[$scope.url.length-1].tag = cssT.first + valid[1] + cssT.second;
 				$scope.url[$scope.url.length-1].csst = true;
 			}
-			$scope.url.push({text:$scope.url.text,id:$scope.url[$scope.url.length-1].id+1,del:false,disabled:false,blank:true,csst:null,jst:null});
+			$scope.url.push({text:$scope.url.text,id:$scope.url[$scope.url.length-1].id+1,del:false,disabled:false,blank:true,csst:null,jst:null,pkg_name:''});
 		}
 	}
 
-	$scope.cdnChose = function(pkg){
+	$scope.cdnChose = function(pkg,name){
 
 		if($scope.as===undefined){
  			$scope.as = JSON.parse(cdnObject.content.body);
@@ -88,6 +121,7 @@ angular.module('usys.controllers',[])
 			$scope.url[$scope.url.length-1].text = pkg+'';
 			$scope.url[$scope.url.length-1].disabled = true;
 			$scope.url[$scope.url.length-1].blank = false;
+			$scope.url[$scope.url.length-1].pkg_name = name;
 			$scope.vl();
 			//-------Configuring views to defaults---------
 			$scope.cancel_cdn();
