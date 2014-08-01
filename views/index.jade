@@ -4,6 +4,9 @@ block content
 	section(ng-app='usys',id='content')
 		div(ng-controller='urlCTRL',id='text')
 			div(class='inputs')
+				a(ng-click='template_s()',href='')
+					| Switch to {{template.opp}}
+
 				section(ng-repeat='u in url',class='txtin')
 
 					section(ng-hide='u.blank',class='txtin')
@@ -20,17 +23,53 @@ block content
 						button(ng-click='introduce()',data-clipboard-text='ass',id='copy-element')
 							| Introduce your own package
 
+				div(id='wget-box')
+					| wget your css files
+					section(id='wget-css',class='wget')
+						| wget
+						span(ng-repeat='ur in url',ng-show='ur.csst')
+							|  {{ur.text}}
+					button(id='wgetc-button',data-clipboard-target='wget-css',tittle='Click to copy to clipboard',class='cpy-btn')
+						| Copy to wget css clipboard
+					br
+
+
+					| wget your js files
+					section(id='wget-js',class='wget')
+						| wget
+						span(ng-repeat='ur in url',ng-show='ur.jst')
+							|  {{ur.text}}
+					button(id='wgetj-button',data-clipboard-target='wget-js',tittle='Click to copy to clipboard',class='cpy-btn')
+						| Copy to wget js clipboard
+
 			
 			div(class='code-container')
 				div(id='ccontainer-1')
 					div(class='path')
 						| Introduce your the path where your css files are placed in: 
-						input(type='text',ng-model='path.css',id='path-css',ng-change='pathc()')
-					div(id='codeHead',class='code')
-						| &lthead&gt
-						tag(ng-repeat='u in url',ng-show='u.type == ".css"')
-							| {{u.tag}}
-						| &lt/head&gt
+						input(type='text',ng-model='path.css',id='path-css',ng-change='pathc()',placeholder='Introduce your path')
+
+
+
+					div(id='htmlc-code',ng-show='template.html')
+						div(id='codeHead',class='code')
+							| &lthead&gt
+							br
+							tag(ng-repeat='u in url',ng-show='u.type == ".css"')
+								| {{u.tag}}
+								br
+							| &lt/head&gt
+
+					div(id='jadec-code',ng-show='template.jade')
+						div(id='codeHead',class='code')
+							| head
+							br
+							tag(ng-repeat='u in url',ng-show='u.type == ".css"')
+								| {{u.jtag}}
+								br
+
+
+
 					button(id='css-button',tittle='Click to copy to clipboard',class='cpy-btn')
 						| Copy css to clipboard
 
@@ -38,9 +77,22 @@ block content
 					div(class='path')
 						| Introduce your the path where your js files are placed in: 
 						input(type='text',ng-model='path.js',id='path-js',ng-change='pathc()')
-					div(id='codeBody',class='code')
-						tag(ng-repeat='u in url',ng-show='u.type == ".js"')
-							| {{u.tag}}
+
+
+					div(id='htmlj-code',ng-show='template.html')
+						div(id='codeBody',class='code')
+							tag(ng-repeat='u in url',ng-show='u.type == ".js"')
+								| {{u.tag}}
+								br
+
+					div(id='jadej-code',ng-show='template.jade')
+						div(id='codeBody',class='code')
+							tag(ng-repeat='u in url',ng-show='u.type == ".js"')
+								| {{u.jtag}}
+								br
+
+
+
 					button(id='js-button',data-clipboard-target='codeBody',tittle='Click to copy to clipboard',class='cpy-btn')
 						| Copy to js clipboard
 
@@ -63,3 +115,5 @@ block content
 							br
 					button(ng-click='cancel_cdn()')
 						| Cancel
+
+

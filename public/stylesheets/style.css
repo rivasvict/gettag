@@ -103,3 +103,21 @@ a.pkg-link{
 	font-weight:bold;
 	display:none;
 }
+
+#wget-css{
+
+}
+
+#wget-js{
+
+}
+
+.wget{
+	background-color: rgb(104, 104, 104);
+	color: white;
+	padding: 4px 7px;
+}
+
+#wget-box{
+	width: 57%;
+}
