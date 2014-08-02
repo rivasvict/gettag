@@ -17,10 +17,11 @@ angular.module('usys.services_more',[])
 				ret = v.finder;
 				slash = url.lastIndexOf("/");
 				slic = url.slice(slash+1,url.length);
+				upath = url.slice(0,slash+1);
 			}
 		});
 		if(ret !== false){
-			return [ret,slic];
+			return [ret,slic,upath];
 		}else{
 			return false;
 		}
