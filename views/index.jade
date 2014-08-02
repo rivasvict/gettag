@@ -27,7 +27,7 @@ block content
 						button(ng-click='introduce()',data-clipboard-text='ass',id='copy-element')
 							| Introduce your own package
 
-				div(id='wget-box')
+				div(id='wget-box',ng-show='local_remote.path')
 					| wget your css files
 					section(id='wget-css',class='wget')
 						| wget
