@@ -49,8 +49,8 @@ block content
 			
 			div(class='code-container')
 				div(id='ccontainer-1')
-					div(class='path')
-						| Introduce your the path where your css files are placed in: 
+					div(class='path',ng-show='local_remote.path')
+						| Introduce the path where your css files are placed in: 
 						input(type='text',ng-model='path.css',id='path-css',ng-change='pathc()',placeholder='Introduce your path')
 
 
@@ -78,9 +78,9 @@ block content
 						| Copy css to clipboard
 
 				div(id='ccontainer-2')
-					div(class='path')
-						| Introduce your the path where your js files are placed in: 
-						input(type='text',ng-model='path.js',id='path-js',ng-change='pathc()')
+					div(class='path',ng-show='local_remote.path')
+						| Introduce the path where your js files are placed in: 
+						input(type='text',ng-model='path.js',id='path-js',ng-change='pathc()',placeholder='Introduce your path')
 
 
 					div(id='htmlj-code',ng-show='template.html')
