@@ -214,7 +214,7 @@ angular.module('usys.controllers',[])
 				if($scope.local_remote.path===true){
 					jsT = $scope.tagBuilder();
 				}else{
-					jsT = $scope.tagBuilder($scope.url[$scope.url.length-1].url_path);	
+					jsT = $scope.tagBuilder($scope.url[$scope.url.length-1].url_path);
 				}
 				jade_js = jsT.jjs;
 				jsT = jsT.js;
@@ -242,7 +242,6 @@ angular.module('usys.controllers',[])
 				csst:false,
 				jst:false,
 				pkg_name:'',
-				url_path:'',
 				tag:'',
 				jtag:'',
 				url_path:''
@@ -274,10 +273,11 @@ angular.module('usys.controllers',[])
 	$scope.validate = function(){
 	/*	console.log(cdnObject);
 		$scope.as = JSON.parse(cdnObject.content.body);*/
-		console.log($scope.as);
 		$http({method:'POST',url:'/urlGetter',data:{url:$scope.url[$scope.url.length-1].text}})
 				.success(function(data,status,headers,config){
 					console.log('ok');
+					upath = $validator.fileId($scope.url[$scope.url.length-1].text);
+					$scope.url[$scope.url.length-1].url_path = upath[2];
 					$scope.vl();
 				})
 				.error(function(data,status,headers,cnfig){
