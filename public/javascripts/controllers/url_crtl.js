@@ -154,7 +154,8 @@ angular.module('usys.controllers',[])
 			jst:false,
 			csst:false,
 			pkg_name:'',
-			url_path:''
+			url_path:'',
+			remote:null
 		}];
 	}
 
@@ -244,7 +245,8 @@ angular.module('usys.controllers',[])
 				pkg_name:'',
 				tag:'',
 				jtag:'',
-				url_path:''
+				url_path:'',
+				remote:null
 			});
 		}
 	}
@@ -261,6 +263,7 @@ angular.module('usys.controllers',[])
 			$scope.url[$scope.url.length-1].disabled = true;
 			$scope.url[$scope.url.length-1].blank = false;
 			$scope.url[$scope.url.length-1].pkg_name = name;
+			$scope.url[$scope.url.length-1].remote = true;
 			upath = $validator.fileId(pkg);
 			$scope.url[$scope.url.length-1].url_path = upath[2];
 			$scope.vl();
@@ -278,6 +281,7 @@ angular.module('usys.controllers',[])
 					console.log('ok');
 					upath = $validator.fileId($scope.url[$scope.url.length-1].text);
 					$scope.url[$scope.url.length-1].url_path = upath[2];
+					$scope.url[$scope.url.length-1].remote = true;
 					$scope.vl();
 				})
 				.error(function(data,status,headers,cnfig){
