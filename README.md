@@ -1,7 +1,7 @@
 ﻿Gettag
 ======
 
-A library tag builder for your apps.
+A library tag builder for your web apps.
 
 Hosted on heroku at http://gettag.herokuapp.com/
 
