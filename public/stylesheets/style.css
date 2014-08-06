@@ -17,6 +17,11 @@ body {
 	width:50%;
 }
 
+#insertion{
+	width: 91%;
+	height: 38vh;
+}
+
 .txtin{
 	margin-top:0px;
 }
@@ -27,6 +32,10 @@ body {
 
 .insert{
 	float:left;
+}
+
+#options{
+	margin-bottom: 21vh;
 }
 
 .code-container{
@@ -41,12 +50,18 @@ body {
 	
 }
 
+.code{
+	background-color: gray;
+	color:white;
+	padding: 5px 10px;
+}
+
 .code#codeHead{
-	margin-bottom:40%;
+	height: 37vh;
 }
 
 .code#codeBody{
-	margin-bottom:40%;
+	height: 37vh;
 }
 
 #pkg-modal{
@@ -91,11 +106,14 @@ a.pkg-link{
 }
 
 #pkg-name{
-
+	float: left;
+	width:31%;
 }
 
 #pkg-url{
-
+	font-size:12px;
+	float: left;
+	width:62%;
 }
 
 .error{
@@ -116,8 +134,12 @@ a.pkg-link{
 	background-color: rgb(104, 104, 104);
 	color: white;
 	padding: 4px 7px;
+	overflow-x: scroll;
+	width: 100%;
+	white-space:nowrap;
+	height:32px;
 }
 
 #wget-box{
-	width: 57%;
+	width: 83%;
 }

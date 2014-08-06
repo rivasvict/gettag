@@ -4,30 +4,36 @@ block content
 	section(ng-app='usys',id='content')
 		div(ng-controller='urlCTRL',id='text')
 			div(class='inputs')
-				a(ng-click='template_s()',href='')
-					| Switch to {{template.opp}}
-				br
-				a(ng-click='path_changer()',href='')
-					| See {{local_remote.opp}}
 
+				div(id='insertion')
+					section(ng-repeat='u in url',class='txtin')
 
-				section(ng-repeat='u in url',class='txtin')
+						section(ng-hide='u.blank',class='txtin')
+							| ULR or filename:
+							input(type='text',placeholder='Insert your url',ng-model='u.text',ng-change='validate()',ng-disabled='u.disabled')
+							{{u.pkg_name}}
+							button(ng-click='delet(u.id)',ng-disabled='!u.disabled')
+								| Delete
+							button(ng-click='cancel_insert()',ng-hide='u.disabled')
+								| Cancel insertion
+							span(class='error',id="{{u.id}}")
+						section(ng-show='u.blank',ng-hide='!u.blank',class='insert')
+							button(ng-click='cdnChose()')
+								| Select from CDN source
+							button(ng-click='introduce()',data-clipboard-text='ass',id='copy-element')
+								| Introduce your own package
+							input(upload='upload()',type='file',fileread='u.pkg_name')
+							span(class='error',id="{{u.id}}")
 
-					section(ng-hide='u.blank',class='txtin')
-						| ULR to verify
-						input(type='text',placeholder='Insert your url',ng-model='u.text',ng-change='validate()',ng-disabled='u.disabled')
-						button(ng-click='delet(u.id)',ng-disabled='!u.disabled')
-							| Delete
-						button(ng-click='cancel_insert()',ng-hide='u.disabled')
-							| Cancel insertion
-						span(class='error',id="{{u.id}}")
-					section(ng-show='u.blank',ng-hide='!u.blank',class='insert')
-						button(ng-click='cdnChose()')
-							| Select from CDN source
-						button(ng-click='introduce()',data-clipboard-text='ass',id='copy-element')
-							| Introduce your own package
-						input(upload='upload()',type='file',fileread='u.pkg_name')
-						span(class='error',id="{{u.id}}")
+				div(id='options')
+					span
+						| Options:
+					br
+					a(ng-click='template_s()',href='')
+						| Switch to {{template.opp}} template
+					br
+					a(ng-click='path_changer()',href='')
+						| See tags as {{local_remote.opp}} hosted files
 
 
 				div(id='wget-box',ng-show='local_remote.path')
@@ -103,8 +109,6 @@ block content
 					button(id='js-button',data-clipboard-target='codeBody',tittle='Click to copy to clipboard',class='cpy-btn')
 						| Copy to js clipboard
 
-				//
-					iframe(id='ifr',ng-src='{{urli}}')
 			section(ng-show='!pkg',id='pkg-modal')
 				div(id='pkg-modal-inner')
 					span(name='sp')
@@ -114,9 +118,9 @@ block content
 					div(id='cdn-results')
 						div(id='cdnPkg',ng-repeat='pkg in as.results | filter:pkgs',class='pkg-item')
 							div(id='pkg-name')
-								| Name: {{pkg.name}} - 
+								| Name: {{pkg.name}}
 							div(id='pkg-url')
-								| Url: {{pkg.latest}} - 
+								| Url: {{pkg.latest}} 
 							a(ng-click='cdnChose(pkg.latest,pkg.name)',href='',class='pkg-link')
 								| Select
 							br
