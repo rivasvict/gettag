@@ -1,4 +1,4 @@
-Gettag
+﻿Gettag
 ======
 
 A library tag builder for your apps.
@@ -39,7 +39,7 @@ node bin/www
 MIT Licence
 -----------
 
-Copyright (c) 2014 Victor Rivas.
+Copyright (c) 2014 Victor Rivas [vctr90.github.io](https://vctr90.github.io).
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
