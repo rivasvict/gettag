@@ -119,10 +119,16 @@ a {
   color: #00B7FF;
 }
 
+#search-box{
+	margin-left: 35%;
+	font-size: 20px;
+	font-weight: bold;
+}
+
 a.pkg-link{
-	color: #FFFFFF;
+	color: #FF5C1D;
 	text-decoration: none;
-	background-color: lime;
+	background-color: white;
 	padding:5px;
 }
 
@@ -139,6 +145,13 @@ a.pkg-link{
 	font-size:12px;
 	float: left;
 	width:62%;
+}
+
+#c-btn{
+	margin-left: 47%;
+	margin-top: -1px;
+	font-size: 16px;
+	font-weight: bold;
 }
 
 .error{

@@ -117,10 +117,11 @@ block content
 
 			section(ng-show='!pkg',id='pkg-modal')
 				div(id='pkg-modal-inner')
-					span(name='sp')
-						| Search by package name: 
-					input(type='text',name='pkgSearch',ng-model='pkgs.name')
-					br
+					div(id='search-box')
+						span(name='sp')
+							| Search by package name: 
+						input(type='text',name='pkgSearch',ng-model='pkgs.name')
+						br
 					div(id='cdn-results')
 						div(id='cdnPkg',ng-repeat='pkg in as.results | filter:pkgs',class='pkg-item')
 							div(id='pkg-name')
@@ -130,5 +131,5 @@ block content
 							a(ng-click='cdnChose(pkg.latest,pkg.name)',href='',class='pkg-link')
 								| Select
 							br
-					button(ng-click='cancel_cdn()')
+					button(ng-click='cancel_cdn()',id='c-btn')
 						| Cancel
