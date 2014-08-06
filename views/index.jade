@@ -26,6 +26,9 @@ block content
 							| Select from CDN source
 						button(ng-click='introduce()',data-clipboard-text='ass',id='copy-element')
 							| Introduce your own package
+						input(upload='upload()',type='file',fileread='u.pkg_name')
+						span(class='error',id="{{u.id}}")
+
 
 				div(id='wget-box',ng-show='local_remote.path')
 					| wget your css files

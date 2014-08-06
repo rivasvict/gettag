@@ -294,6 +294,19 @@ angular.module('usys.controllers',[])
 
 	};
 
+	$scope.upload = function(){
+		var valid = $validator.urlC('ok',$scope.url[$scope.url.length-1].id,'/'+$scope.url[$scope.url.length-1].pkg_name,$validator.eMessage.invalidFile);
+
+
+		if(valid!==false){
+			$scope.url[$scope.url.length-1].text = $scope.url[$scope.url.length-1].pkg_name;
+			$scope.url[$scope.url.length-1].disabled = true;
+			$scope.url[$scope.url.length-1].blank = false;
+			$scope.url[$scope.url.length-1].remote = false;
+			$scope.vl();
+		}
+	};
+
 /*	$scope.validate = function(){
 		var action = $scope.check();
 		if(action){
