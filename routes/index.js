@@ -6,7 +6,7 @@ var request = require('request');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'scrptTagger - Get script and css tsgs for your app' });
+  res.render('index', { title: 'Gettag - Get script and css tags for your web app' });
 });
 
 router.post('/urlGetter', function(req,res){

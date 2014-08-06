@@ -1,6 +1,12 @@
 extends layout
 
 block content
+	div(id='head')
+		div(id='app-name')
+			| Gettag - 
+			span
+				| Start building your tag libraries with buttons bellow
+		hr(class='style-one')
 	section(ng-app='usys',id='content')
 		div(ng-controller='urlCTRL',id='text')
 			div(class='inputs')
@@ -43,7 +49,7 @@ block content
 						span(ng-repeat='ur in url',ng-show='ur.csst')
 							|  {{ur.text}}
 					button(id='wgetc-button',data-clipboard-target='wget-css',tittle='Click to copy to clipboard',class='cpy-btn')
-						| Copy to wget css clipboard
+						| Copy wget css to clipboard
 					br
 
 
@@ -53,7 +59,7 @@ block content
 						span(ng-repeat='ur in url',ng-show='ur.jst')
 							|  {{ur.text}}
 					button(id='wgetj-button',data-clipboard-target='wget-js',tittle='Click to copy to clipboard',class='cpy-btn')
-						| Copy to wget js clipboard
+						| Copy wget js to clipboard
 
 			
 			div(class='code-container')
@@ -84,7 +90,7 @@ block content
 
 
 					button(id='css-button',tittle='Click to copy to clipboard',class='cpy-btn')
-						| Copy css to clipboard
+						| Copy css to tags to clipboard
 
 				div(id='ccontainer-2')
 					div(class='path',ng-show='local_remote.path')
@@ -107,7 +113,7 @@ block content
 
 
 					button(id='js-button',data-clipboard-target='codeBody',tittle='Click to copy to clipboard',class='cpy-btn')
-						| Copy to js clipboard
+						| Copy js tags to clipboard
 
 			section(ng-show='!pkg',id='pkg-modal')
 				div(id='pkg-modal-inner')

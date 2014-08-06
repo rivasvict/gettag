@@ -3,8 +3,33 @@
 }
 
 body {
-	padding: 50px 2% 10px 2%;
+	padding: 0px 2% 10px 2%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+#head{
+	font-size: 31px;
+	font-weight: bold;
+}
+
+#head span{
+	font-size: 21px;
+	font-weight: initial;
+	color: gray;
+}
+
+#app-name{
+	height: 23px;
+}
+
+hr.style-one {
+	border: 0;
+	height: 1px;
+	background: #333;
+	background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc); 
+	background-image:    -moz-linear-gradient(left, #ccc, #333, #ccc); 
+	background-image:     -ms-linear-gradient(left, #ccc, #333, #ccc); 
+	background-image:      -o-linear-gradient(left, #ccc, #333, #ccc); 
 }
 
 #content{
@@ -35,7 +60,7 @@ body {
 }
 
 #options{
-	margin-bottom: 21vh;
+	margin-bottom: 19vh;
 }
 
 .code-container{
@@ -61,7 +86,7 @@ body {
 }
 
 .code#codeBody{
-	height: 37vh;
+	height: 34vh;
 }
 
 #pkg-modal{
