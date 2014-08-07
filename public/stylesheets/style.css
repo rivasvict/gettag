@@ -12,6 +12,11 @@ body {
 	font-weight: bold;
 }
 
+#footer{
+	font-size: 13px;
+	margin-left: 88%;
+}
+
 #head span{
 	font-size: 21px;
 	font-weight: initial;
@@ -20,9 +25,11 @@ body {
 
 #app-name{
 	height: 23px;
+	float:left;
 }
 
 hr.style-one {
+	margin-top: 23px;
 	border: 0;
 	height: 1px;
 	background: #333;
