@@ -9,6 +9,13 @@ Version
 -------
 0.0.1 (Beta)
 
+Technologies used:
+------------------
+
+ - NodeJs
+ - ExpressJs
+ - AngularJs
+
 Installation
 ------------
 

@@ -1,12 +1,56 @@
 angular.module('usys.controllers',[])
 	.controller('urlCTRL',['$scope','$validator','$sce','$http','cdnObject',function($scope,$validator,$sce,$http,cdnObject){
 
+//----------Initial object conf
+	if(!$scope.url){
+		$scope.url = [{
+			text:'',
+			id:0,
+			del:false,
+			disabled:false,
+			type:'',
+			tag:'',
+			jtag:'',
+			blank:true,
+			jst:false,
+			csst:false,
+			pkg_name:'',
+			url_path:'',
+			remote:null
+		}];
+	}
+//----------------------------
+
+
+//----------Default global Configuration
+
+
+	//----------Location conf
 	$scope.local_remote = {
 		url:false,
 		path:true,
 		place:'local',
 		opp:'remote'
 	}
+	//----------------------
+
+
+	//----------Path conf
+	$scope.path = {
+		css:'',
+		js:''
+	}
+	//---------------------
+
+
+	//----------Configuration view for pkg modal
+	$scope.pkg = true;
+	//------------------------------------------
+
+//-----------------------------
+
+
+//----------Path changer---------------------------
 	$scope.path_changer = function(){
 		if($scope.local_remote.place==='local'){
 			angular.forEach($scope.url,function(v,k){
@@ -39,6 +83,47 @@ angular.module('usys.controllers',[])
 		}
 	}
 
+
+	//----------Path builder and concatenator function------------------------------
+	var tags = function(v,n_first,n_second,fn,pointer,remote){
+		var first = v[pointer].slice(0,n_first);
+		var second =  v[pointer].slice(v[pointer].length-n_second,v[pointer].length);
+		var package = v.pkg_name;
+		if(remote!==undefined){
+			var path = v.url_path;
+		}else{
+			var path = $scope.path[fn];
+		}
+		v[pointer] = '';
+		v[pointer] = first + path + package + second;
+		return v[pointer];
+	}
+	//-------------------------------------------------------------------------------
+
+
+	//----------Path changing trigger--------------------------------
+	//--pathc triggers path updating functions from UI with ng-change
+	$scope.pathc = function(){
+		angular.forEach($scope.url,function(v,k){
+			if($scope.local_remote.place==='local'){
+				if(v.csst!==false){
+					v.tag = tags(v,44,4,'css','tag');
+					v.jtag = tags(v,43,2,'css','jtag');
+				}else if(v.jst!==false){
+					v.tag = tags(v,36,11,'js','tag');
+					v.jtag = tags(v,35,2,'js','jtag');
+				}
+			}else{
+			}
+		});
+	}
+	//---------------------------------------------------------------
+
+
+//------------------------------------------------
+
+
+//----------Switching between both html and jade templates--------
 	$scope.template = {name:'html',opp:'jade',html:true,jade:false};
 	$scope.template_s = function(){
 		if($scope.template.name === 'html'){
@@ -53,8 +138,10 @@ angular.module('usys.controllers',[])
 			$scope.template.jade = false;
 		}
 	}
+//-----------------------------------------------------------------
 
-//-------------CLIPBOARD AREA--------------
+
+//-------------CLIPBOARD AREA----------------------------------
 	var css_clip = new ZeroClipboard($('button#css-button'));
 	var js_clip = new ZeroClipboard($('button#js-button'));
 	var w_css_clip = new ZeroClipboard($('button#wgetc-button'));
@@ -103,62 +190,10 @@ angular.module('usys.controllers',[])
 		alert('Copied!');
 	});
 
+//-------------------------------------------------------
 
 
-//----------------------------------------
-
-	$scope.path = {
-		css:'',
-		js:''
-	}
-
-	var tags = function(v,n_first,n_second,fn,pointer,remote){
-		var first = v[pointer].slice(0,n_first);
-		var second =  v[pointer].slice(v[pointer].length-n_second,v[pointer].length);
-		var package = v.pkg_name;
-		if(remote!==undefined){
-			var path = v.url_path;
-		}else{
-			var path = $scope.path[fn];
-		}
-		v[pointer] = '';
-		v[pointer] = first + path + package + second;
-		return v[pointer];
-	}
-
-	$scope.pathc = function(){
-		angular.forEach($scope.url,function(v,k){
-			if($scope.local_remote.place==='local'){
-				if(v.csst!==false){
-					v.tag = tags(v,44,4,'css','tag');
-					v.jtag = tags(v,43,2,'css','jtag');
-				}else if(v.jst!==false){
-					v.tag = tags(v,36,11,'js','tag');
-					v.jtag = tags(v,35,2,'js','jtag');
-				}
-			}else{
-			}
-		});
-	}
-
-	if(!$scope.url){
-		$scope.url = [{
-			text:'',
-			id:0,
-			del:false,
-			disabled:false,
-			type:'',
-			tag:'',
-			jtag:'',
-			blank:true,
-			jst:false,
-			csst:false,
-			pkg_name:'',
-			url_path:'',
-			remote:null
-		}];
-	}
-
+//----------UI hendler for buttons----------------
 	$scope.introduce = function(){
 		$scope.url[$scope.url.length-1].blank = false;
 		$scope.pkg = true;
@@ -174,9 +209,30 @@ angular.module('usys.controllers',[])
 		$scope.pkgs = '';
 		$scope.pkg = true;
 	}
+//------------------------------------------------
 
-	$scope.pkg = true;
 
+//----------New url element function
+	$scope.push_object_element = function(){
+		$scope.url.push({
+			text:$scope.url.text,
+			id:$scope.url[$scope.url.length-1].id+1,
+			del:false,
+			disabled:false,
+			blank:true,
+			csst:false,
+			jst:false,
+			pkg_name:'',
+			tag:'',
+			jtag:'',
+			url_path:'',
+			remote:null
+		});
+	}
+//----------------------------------
+
+
+//----------Tag building function---------------------------------------
 	$scope.tagBuilder = function(url){
 		if(url!==undefined){
 			var fpathjs = url;
@@ -203,7 +259,10 @@ angular.module('usys.controllers',[])
 		}
 		return {js:jsT,css:cssT,jjs:jjsT,jcss:jcssT};
 	}
+//-----------------------------------------------------------------------
 
+
+//----------Tag validator and new objects builder
 	$scope.vl = function(){
 		var valid = $validator.urlC('ok',$scope.url[$scope.url.length-1].id,$scope.url[$scope.url.length-1].text);
 		if(valid !== false){
@@ -234,7 +293,7 @@ angular.module('usys.controllers',[])
 				$scope.url[$scope.url.length-1].jtag = jade_css.first + valid[1] + jade_css.second;
 				$scope.url[$scope.url.length-1].csst = true;
 			}
-			$scope.url.push({
+			/*$scope.url.push({
 				text:$scope.url.text,
 				id:$scope.url[$scope.url.length-1].id+1,
 				del:false,
@@ -247,10 +306,14 @@ angular.module('usys.controllers',[])
 				jtag:'',
 				url_path:'',
 				remote:null
-			});
+			});*/
+			$scope.push_object_element();
 		}
 	}
+//----------------------------------------------------------------------------------------------------------------
 
+
+//----------Handler when chooosing CDN list of sources
 	$scope.cdnChose = function(pkg,name){
 
 		if($scope.as===undefined){
@@ -272,7 +335,11 @@ angular.module('usys.controllers',[])
 		}
 
 	}
+//-------------------------------------------------------
 
+
+//----------Url validator
+//--We need to check if the url given by a user exists or not
 	$scope.validate = function(){
 	/*	console.log(cdnObject);
 		$scope.as = JSON.parse(cdnObject.content.body);*/
@@ -293,7 +360,10 @@ angular.module('usys.controllers',[])
 				});
 
 	};
+//-------------------------------------------------------------------------------------------
 
+
+//----------When uploading files we need to check if they are css or js files and if so, push a new element of the url object
 	$scope.upload = function(){
 		var valid = $validator.urlC('ok',$scope.url[$scope.url.length-1].id,'/'+$scope.url[$scope.url.length-1].pkg_name,$validator.eMessage.invalidFile);
 
@@ -306,6 +376,7 @@ angular.module('usys.controllers',[])
 			$scope.vl();
 		}
 	};
+//------------------------------------------------------------------------------------
 
 /*	$scope.validate = function(){
 		var action = $scope.check();
@@ -364,6 +435,7 @@ angular.module('usys.controllers',[])
 /*	$scope.urli = "sadasant.com/js/Shade.js";
 	$scope.urli = $sce.trustAsResourceUrl($scope.urli);*/
 
+//----------Deletion from url object
 	$scope.delet = function(id){
 		angular.forEach($scope.url,function(v,k){
 			if(v.id === id) v.del = true;
@@ -374,5 +446,5 @@ angular.module('usys.controllers',[])
 			if(!v.del) $scope.url.push(v);
 		});
 	};
-	
+//-----------------------------------------
 	}]);
