@@ -246,7 +246,7 @@ angular.module('usys.controllers',[])
 			second:	'"></script>'
 		};
 		var cssT = {
-			first : '<link type="text/css" rel="stylesheet" src="' + fpathcss,
+			first : '<link type="text/css" rel="stylesheet" href="' + fpathcss,
 			second:	'" />'
 		};
 		var jjsT = {
@@ -254,7 +254,7 @@ angular.module('usys.controllers',[])
 			second:	'")'
 		}
 		var jcssT = {
-			first : 'link(type="text/css",rel="stylesheet",src="' + fpathcss,
+			first : 'link(type="text/css",rel="stylesheet",href="' + fpathcss,
 			second:	'")'
 		}
 		return {js:jsT,css:cssT,jjs:jjsT,jcss:jcssT};
